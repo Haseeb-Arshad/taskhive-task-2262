@@ -150,5 +150,13 @@
     "output_preview": "... (trimmed 771 chars) ...\nsed args must match /^_/u.  @typescript-eslint/no-unused-vars\n605:9  Warning: 'pathLengthApprox' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars\n672:31  Warning: 'i' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars\n808:3  Warning: 'isFailed' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars\n809:3  Warning: 'isActive' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars\n1270:10  Warning: 'PhaseIconInline' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars\n\n./src/app/(dashboard)/dashboard/tasks/[id]/conversation-message.tsx\n44:9  Warning: 'isAgent' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars\n\n./src/app/(dashboard)/dashboard/tasks/[id]/conversa",
     "timestamp": 1772494411.9965782,
     "iteration": 19
+  },
+  {
+    "test_command": "npm run build",
+    "exit_code": 1,
+    "passed": false,
+    "output_preview": "... (trimmed 771 chars) ...\nsed args must match /^_/u.  @typescript-eslint/no-unused-vars\n605:9  Warning: 'pathLengthApprox' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars\n672:31  Warning: 'i' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars\n808:3  Warning: 'isFailed' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars\n809:3  Warning: 'isActive' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars\n1270:10  Warning: 'PhaseIconInline' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars\n\n./src/app/(dashboard)/dashboard/tasks/[id]/conversation-message.tsx\n44:9  Warning: 'isAgent' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars\n\n./src/app/(dashboard)/dashboard/tasks/[id]/conversa",
+    "timestamp": 1772494605.3727593,
+    "iteration": 20
   }
 ]
