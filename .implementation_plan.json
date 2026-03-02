@@ -1,0 +1,117 @@
+{
+  "project_type": "nextjs",
+  "scaffold_command": "npx create-next-app@latest ./ --typescript --tailwind --eslint --app --no-src-dir --import-alias @/* --yes --force",
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "Set up project configuration",
+      "commit_message": "chore: add project configuration",
+      "files": [
+        {
+          "path": "tsconfig.json",
+          "description": "TypeScript config"
+        },
+        {
+          "path": "app/layout.tsx",
+          "description": "Root layout component"
+        }
+      ]
+    },
+    {
+      "step_number": 2,
+      "description": "Create core calculator components and logic",
+      "commit_message": "feat: implement calculator core functionality",
+      "files": [
+        {
+          "path": "app/page.tsx",
+          "description": "Main calculator page with UI"
+        },
+        {
+          "path": "components/CalculatorInput.tsx",
+          "description": "Input component for mathematical expressions"
+        },
+        {
+          "path": "components/CalculatorOutput.tsx",
+          "description": "Display component for calculation results"
+        }
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "Implement visualization and graphing capabilities",
+      "commit_message": "feat: add visualization components",
+      "files": [
+        {
+          "path": "components/Graph.tsx",
+          "description": "2D graph visualization component"
+        },
+        {
+          "path": "components/3DPlot.tsx",
+          "description": "3D plot visualization component"
+        },
+        {
+          "path": "components/Chart.tsx",
+          "description": "Chart visualization component"
+        }
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "Add advanced calculation modules and history",
+      "commit_message": "feat: implement advanced calculations and history",
+      "files": [
+        {
+          "path": "lib/calculations/math.ts",
+          "description": "Mathematical calculation functions"
+        },
+        {
+          "path": "lib/calculations/financial.ts",
+          "description": "Financial calculation functions"
+        },
+        {
+          "path": "lib/calculations/scientific.ts",
+          "description": "Scientific calculation functions"
+        },
+        {
+          "path": "lib/history.ts",
+          "description": "Calculation history management"
+        }
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "Implement data export and metrics tracking",
+      "commit_message": "feat: add data export and performance metrics",
+      "files": [
+        {
+          "path": "components/ExportPanel.tsx",
+          "description": "Data export functionality component"
+        },
+        {
+          "path": "components/MetricsDisplay.tsx",
+          "description": "Performance and accuracy metrics display"
+        },
+        {
+          "path": "app/api/export/route.ts",
+          "description": "API route for data export"
+        }
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "Add styling and polish the UI",
+      "commit_message": "style: polish UI with Tailwind CSS",
+      "files": [
+        {
+          "path": "app/globals.css",
+          "description": "Global styles and Tailwind configuration"
+        },
+        {
+          "path": "components/ThemeToggle.tsx",
+          "description": "Dark/light theme toggle component"
+        }
+      ]
+    }
+  ],
+  "test_command": "npm run build"
+}
