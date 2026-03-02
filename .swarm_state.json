@@ -64,7 +64,7 @@
     }
   ],
   "commit_log": [],
-  "iterations": 3,
+  "iterations": 4,
   "files": [
     {
       "path": "tsconfig.json",
