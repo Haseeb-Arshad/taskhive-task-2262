@@ -1,6 +1,6 @@
 {
   "status": "coding",
-  "current_step": 1,
+  "current_step": 2,
   "total_steps": 6,
   "completed_steps": [
     {
@@ -10,6 +10,16 @@
       "files_written": [
         "tsconfig.json",
         "app/layout.tsx"
+      ]
+    },
+    {
+      "step_number": 2,
+      "description": "Create core calculator components and logic",
+      "commit": "9b0ddfb",
+      "files_written": [
+        "app/page.tsx",
+        "components/CalculatorInput.tsx",
+        "components/CalculatorOutput.tsx"
       ]
     }
   ],
@@ -23,6 +33,18 @@
     {
       "path": "app/layout.tsx",
       "content": "import './globals.css'\nimport { Inter } from 'next/font/google'\n\nconst inter = Inter({ subsets: ['latin'] })\n\nexport const metadata = {\n  title: 'Advanced Magic Calculator',\n  description: 'A powerful calculator with advanced mathematical functions, visualizations, and metrics',\n}\n\nexport default function RootLayout({\n  children,\n}: {\n  children: React.ReactNode\n}) {\n  return (\n    <html lang=\"en\">\n      <body className={inter.className}>{children}</body>\n    </html>\n  )\n}"
+    },
+    {
+      "path": "app/page.tsx",
+      "content": "import React, { useState } from 'react';\nimport CalculatorInput from '@/components/CalculatorInput';\nimport CalculatorOutput from '@/components/CalculatorOutput';\nimport { evaluate } from 'mathjs';\nimport { Plot } from 'react-plotly.js';\n\nexport default function Home() {\n  const [expression, setExpression] = useState('');\n  const [result, setResult] = useState(null);\n  const [plotData, setPlotData] = useState(null);\n  const [error, setError] = useState('');\n\n  const handleCalculate = () => {\n    try {\n      const calculationResult = evaluate(expression);\n      setResult(calculationResult);\n      \n      // Generate plot data if it's a function\n      if (typeof calculationResult === 'function') {\n        const xValues = Array.from({ length: 100 }, (_, i) => -10 + (i * 20) / 99);\n        const yValues = xValues.map(x => calculationResult(x));\n        \n        setPlotData({\n          x: xValues,\n          y: yValues,\n          type: 'scatter',\n          mode: 'lines',\n          marker: { color: 'blue' }\n        });\n      } else {\n        setPlotData(null);\n      }\n      \n      setError('');\n    } catch (err) {\n      setError(err instanceof Error ? err.message : 'Invalid expression');\n      setResult(null);\n      setPlotData(null);\n    }\n  };\n\n  return (\n    <div className=\"min-h-screen bg-gray-50 p-6\">\n      <div className=\"max-w-4xl mx-auto\">\n        <h1 className=\"text-4xl font-bold text-gray-800 mb-8 text-center\">\n          Advanced Magic Calculator\n        </h1>\n        \n        <div className=\"bg-white rounded-2xl shadow-lg p-8 mb-6\">\n          <CalculatorInput\n            expression={expression}\n            onExpressionChange={setExpression}\n            onCalculate={handleCalculate}\n          />\n          \n          {error && (\n            <div className=\"mt-4 p-3 bg-red-50 border border-red-200 rounded-md\">\n              <p className=\"text-red-600 font-medium\">Error: {error}</p>\n            </div>\n          )}\n        </div>\n\n        {result !== null && (\n          <div className=\"bg-white rounded-2xl shadow-lg p-8 mb-6\">\n            <CalculatorOutput\n              expression={expression}\n              result={result}\n              plotData={plotData}\n            />\n          </div>\n        )}\n      </div>\n    </div>\n  );\n}"
+    },
+    {
+      "path": "components/CalculatorInput.tsx",
+      "content": "import React from 'react';\nimport { Button } from '@mui/material';\nimport { evaluate } from 'mathjs';\n\ninterface CalculatorInputProps {\n  expression: string;\n  onExpressionChange: (expr: string) => void;\n  onCalculate: () => void;\n}\n\nconst CalculatorInput: React.FC<CalculatorInputProps> = ({\n  expression,\n  onExpressionChange,\n  onCalculate\n}) => {\n  const handleExpressionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {\n    onExpressionChange(e.target.value);\n  };\n\n  const handleKeyDown = (e: React.KeyboardEvent) => {\n    if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {\n      e.preventDefault();\n      onCalculate();\n    }\n  };\n\n  return (\n    <div>\n      <div className=\"mb-4\">\n        <label htmlFor=\"expression\" className=\"block text-sm font-medium text-gray-700 mb-2\">\n          Enter your mathematical expression:\n        </label>\n        <textarea\n          id=\"expression\"\n          rows={4}\n          value={expression}\n          onChange={handleExpressionChange}\n          onKeyDown={handleKeyDown}\n          className=\"w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500\"\n          placeholder=\"e.g., sin(x), x^2 + 2x + 1, integrate(x^2, x)\"\n        />\n      </div>\n      \n      <div className=\"flex gap-2\">\n        <Button\n          variant=\"contained\"\n          size=\"large\"\n          onClick={onCalculate}\n          disabled={!expression.trim()}\n          className=\"flex-1 bg-blue-600 hover:bg-blue-700\"\n        >\n          Calculate\n        </Button>\n        <Button\n          variant=\"outlined\"\n          size=\"large\"\n          onClick={() => onExpressionChange('')}\n          className=\"flex-1\"\n        >\n          Clear\n        </Button>\n      </div>\n    </div>\n  );\n};\n\nexport default CalculatorInput;"
+    },
+    {
+      "path": "components/CalculatorOutput.tsx",
+      "content": "import React from 'react';\nimport { Plot } from 'react-plotly.js';\nimport { evaluate } from 'mathjs';\n\ninterface CalculatorOutputProps {\n  expression: string;\n  result: any;\n  plotData: any;\n}\n\nconst CalculatorOutput: React.FC<CalculatorOutputProps> = ({\n  expression,\n  result,\n  plotData\n}) => {\n  const isFunction = typeof result === 'function';\n  const isComplex = result && result.re !== undefined && result.im !== undefined;\n  \n  const formatResult = (res: any): string => {\n    if (isComplex) {\n      return `${res.re} + ${res.im}i`;\n    }\n    if (typeof res === 'number') {\n      return res.toString();\n    }\n    if (typeof res === 'object') {\n      return JSON.stringify(res, null, 2);\n    }\n    return res.toString();\n  };\n\n  return (\n    <div>\n      <div className=\"mb-6\">\n        <h2 className=\"text-2xl font-semibold text-gray-800 mb-4\">\n          Calculation Result\n        </h2>\n        \n        <div className=\"bg-gray-50 rounded-lg p-4 mb-4\">\n          <div className=\"flex items-center justify-between mb-2\">\n            <span className=\"text-sm text-gray-600\">Expression:</span>\n            <code className=\"bg-white p-1 rounded text-sm\">{expression}</code>\n          </div>\n          \n          <div className=\"flex items-center justify-between\">\n            <span className=\"text-sm text-gray-600\">Result:</span>\n            <div className=\"flex items-center gap-2\">\n              <span className=\"font-mono text-lg\">{formatResult(result)}</span>\n              {isFunction && (\n                <span className=\"text-xs text-gray-500\">(function)</span>\n              )}\n            </div>\n          </div>\n        </div>\n\n        {isFunction && (\n          <div className=\"bg-blue-50 rounded-lg p-4\">\n            <h3 className=\"text-sm font-semibold text-blue-800 mb-2\">Function Analysis:</h3>\n            <div className=\"grid grid-cols-2 gap-4 text-sm\">\n              <div>\n                <span className=\"text-gray-600\">Derivative:</span>\n                <code className=\"ml-2\">{evaluate(`derivative(${expression}, x)`)}</code>\n              </div>\n              <div>\n                <span className=\"text-gray-600\">Integral:</span>\n                <code className=\"ml-2\">{evaluate(`integrate(${expression}, x)`)}</code>\n              </div>\n            </div>\n          </div>\n        )}\n      </div>\n\n      {plotData && (\n        <div className=\"bg-white rounded-2xl shadow-sm p-6\">\n          <h3 className=\"text-xl font-semibold text-gray-800 mb-4\">Visualization</h3>\n          <Plot\n            data={[plotData]}\n            layout={{\n              title: 'Function Plot',\n              xaxis: { title: 'x' },\n              yaxis: { title: 'f(x)' },\n              showlegend: false,\n              height: 400\n            }}\n            config={{ responsive: true }}\n            className=\"w-full\"\n          />\n        </div>\n      )}\n    </div>\n  );\n};\n\nexport default CalculatorOutput;"
     }
   ],
   "test_command": "npm run build",
