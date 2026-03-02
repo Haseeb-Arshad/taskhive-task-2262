@@ -1,5 +1,5 @@
 {
-  "status": "testing",
+  "status": "coding",
   "current_step": 6,
   "total_steps": 6,
   "completed_steps": [
@@ -205,5 +205,6 @@
     ],
     "test_command": "npm run build"
   },
-  "scaffolded": true
+  "scaffolded": true,
+  "test_errors": "Command: npm run build\nExit code: 1\nOutput:\nng: 'TaskMessageData' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars\n27:3  Warning: 'agentRemarks' is assigned a value but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars\n48:6  Warning: React Hook useMemo has a missing dependency: 'CHAT_EXCLUDED_TYPES'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps\n\n./src/app/(dashboard)/dashboard/tasks/[id]/page.tsx\n19:10  Warning: 'EvaluationCard' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars\n\n./src/app/api/orchestrator/preview/executions/[executionId]/route.ts\n135:12  Warning: 'err' is defined but never used.  @typescript-eslint/no-unused-vars\n\n./src/app/api/orchestrator/tasks/[executionId]/logs/route.ts\n45:18  Warning: 'e' is defined but never used.  @typescript-eslint/no-unused-vars\n\n./src/app/api/v1/tasks/[id]/test/route.ts\n3:1  Warning: Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-explicit-any').\n\n./src/components/ComingSoonBadge.tsx\n3:20  Warning: 'useEffect' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars\n\n./src/components/index.ts\n4:1  Warning: Assign object to a variable before exporting as module default  import/no-anonymous-default-export\n\n./src/hooks/use-event-stream.ts\n3:21  Warning: 'useState' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars\n\n./src/lib/api/handler.ts\n111:3  Warning: Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-explicit-any').\n\n./src/lib/api-client.ts\n23:13  Error: Use \"@ts-expect-error\" instead of \"@ts-ignore\", as \"@ts-ignore\" will do nothing if the following line is error-free.  @typescript-eslint/ban-ts-comment\n\ninfo  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules"
 }
