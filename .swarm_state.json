@@ -1,11 +1,30 @@
 {
   "status": "coding",
-  "current_step": 0,
+  "current_step": 1,
   "total_steps": 6,
-  "completed_steps": [],
+  "completed_steps": [
+    {
+      "step_number": 1,
+      "description": "Set up project configuration",
+      "commit": "a5d81cd",
+      "files_written": [
+        "tsconfig.json",
+        "app/layout.tsx"
+      ]
+    }
+  ],
   "commit_log": [],
   "iterations": 0,
-  "files": [],
+  "files": [
+    {
+      "path": "tsconfig.json",
+      "content": "{\n  \"compilerOptions\": {\n    \"target\": \"ES2020\",\n    \"lib\": [\"DOM\", \"DOM.Iterable\", \"ES6\"],\n    \"allowJs\": true,\n    \"skipLibCheck\": true,\n    \"esModuleInterop\": true,\n    \"allowSyntheticDefaultImports\": true,\n    \"strict\": true,\n    \"forceConsistentCasingInFileNames\": true,\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"node\",\n    \"resolveJsonModule\": true,\n    \"isolatedModules\": true,\n    \"noEmit\": true,\n    \"jsx\": \"react-jsx\",\n    \"baseUrl\": \".\",\n    \"paths\": {\n      \"@/*\": [\"src/*\"],\n      \"@/components/*\": [\"src/components/*\"],\n      \"@/hooks/*\": [\"src/hooks/*\"],\n      \"@/utils/*\": [\"src/utils/*\"],\n      \"@/types/*\": [\"src/types/*\"],\n      \"@/constants/*\": [\"src/constants/*\"],\n      \"@/services/*\": [\"src/services/*\"],\n      \"@/stores/*\": [\"src/stores/*\"],\n      \"@/styles/*\": [\"src/styles/*\"],\n      \"@/assets/*\": [\"src/assets/*\"]\n    }\n  },\n  \"include\": [\"src/**/*\"],\n  \"exclude\": [\"node_modules\", \"dist\", \"build\", \".next\"]\n}"
+    },
+    {
+      "path": "app/layout.tsx",
+      "content": "import './globals.css'\nimport { Inter } from 'next/font/google'\n\nconst inter = Inter({ subsets: ['latin'] })\n\nexport const metadata = {\n  title: 'Advanced Magic Calculator',\n  description: 'A powerful calculator with advanced mathematical functions, visualizations, and metrics',\n}\n\nexport default function RootLayout({\n  children,\n}: {\n  children: React.ReactNode\n}) {\n  return (\n    <html lang=\"en\">\n      <body className={inter.className}>{children}</body>\n    </html>\n  )\n}"
+    }
+  ],
   "test_command": "npm run build",
   "repo_url": "https://github.com/Haseeb-Arshad/taskhive-task-2262",
   "plan": {
